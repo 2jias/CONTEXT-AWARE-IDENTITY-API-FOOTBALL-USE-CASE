@@ -1,0 +1,64 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: #f6f7fb;
+  color: #0f172a;
+}
+
+/* Theme tokens */
+:root{
+  --bg:#f6f7fb; --card:#fff; --text:#0f172a; --muted:#64748b;
+  --primary:#0f172a; --primary-contrast:#fff;
+  --danger:#e11d48; --danger-contrast:#fff;
+  --border:#e2e8f0; --radius:14px; --shadow:0 1px 2px rgba(0,0,0,.06);
+}
+
+/* Layout */
+.container{max-width:1140px;margin:0 auto;padding:24px}
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:10}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand-logo{width:84px;height:28px;background:#0f172a;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.header-actions{display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:999px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:#475569}
+
+/* Cards & grid */
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow)}
+.card-pad{padding:18px}
+.grid{display:grid;gap:24px}
+@media (min-width:960px){ .grid-2{grid-template-columns:2fr 1fr} }
+
+/* Buttons & inputs */
+.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:600}
+.btn:hover{filter:brightness(.98)}
+.btn-primary{background:var(--primary);color:var(--primary-contrast);border:none}
+.btn-danger{background:var(--danger);color:var(--danger-contrast);border:none}
+.btn-ghost{background:#fff}
+.input,.select,textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:#fff}
+.label{font-size:13px;color:#334155;margin-bottom:6px;font-weight:600}
+
+/* Table (admin, coach lists) */
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th{background:#f8fafc;color:#475569;text-align:left;padding:12px;border-bottom:1px solid var(--border)}
+.table td{padding:12px;border-top:1px solid var(--border)}
+
+/* Hero blocks */
+.hero{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin:80px auto;max-width:620px}
+.hero h1{font-size:34px;margin:0}
+.hero p{color:var(--muted);margin:0}
+
+/* Headings */
+.page-title{font-size:28px;margin:18px 0;text-align:center}
+.section-title{font-size:18px;margin:0 0 12px 0}
+
+/* Badges */
+.badge{padding:2px 8px;border-radius:999px;font-size:12px}
+.badge-ok{background:#dcfce7;color:#166534}.badge-bad{background:#ffe4e6;color:#9f1239}
+
+/* Tiny utils */
+.center{display:flex;justify-content:center}
+.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mb-16{margin-bottom:16px}
+.row{display:flex;gap:10px;align-items:center}

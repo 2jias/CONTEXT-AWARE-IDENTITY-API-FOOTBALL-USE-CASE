@@ -1,0 +1,25 @@
+@'
+# General
+*.log
+*.zip
+.DS_Store
+.vscode/
+
+# Node / Frontend / Backend
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+
+# Angular envs (if any)
+src/environments/*.ts
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+appsettings.*.json
+'@ | Set-Content .gitignore
