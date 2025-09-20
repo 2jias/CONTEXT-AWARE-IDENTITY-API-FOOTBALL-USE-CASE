@@ -1,4 +1,4 @@
-// src/utils/api.js
+//src/utils/api.js
 import axios from 'axios';
 
 export const API_BASE =
@@ -9,14 +9,14 @@ const api = axios.create({ baseURL: API_BASE });
 let isRefreshing = false;
 let queue = [];
 
-// attach access token if present
+//attach access token if present
 api.interceptors.request.use((config) => {
   const at = localStorage.getItem('accessToken');
   if (at) config.headers.Authorization = `Bearer ${at}`;
   return config;
 });
 
-// helper: detect auth endpoints
+//helper: detect auth endpoints
 const isAuthEndpoint = (cfg = {}) => {
   const url = (cfg.url || '');
   return (
@@ -32,12 +32,12 @@ api.interceptors.response.use(
   async (err) => {
     const original = err.config || {};
 
-    // If it's a 401 from an AUTH endpoint, don't try to refresh — let caller handle it (e.g., 2FA_REQUIRED).
+    //if it's a 401 from an AUTH endpoint, don't try to refresh — let caller handle it (e.g., 2FA_REQUIRED).
     if (err.response?.status === 401 && isAuthEndpoint(original)) {
       return Promise.reject(err);
     }
 
-    // Normal 401 flow: try refresh once, then replay
+    //normal 401 flow: try refresh once, then replay
     if (err.response?.status === 401 && !original._retry) {
       original._retry = true;
 
@@ -53,16 +53,16 @@ api.interceptors.response.use(
           localStorage.setItem('refreshToken', data.refreshToken);
           if (data.role) localStorage.setItem('role', data.role);
 
-          // drain the queue
+          //drain the queue
           queue.forEach((cb) => cb(data.accessToken));
           queue = [];
 
-          // retry original
+          //retry original
           original.headers = { ...(original.headers || {}), Authorization: `Bearer ${data.accessToken}` };
           return api(original);
         } catch (e) {
           queue = [];
-          // hard logout on refresh failure (for non-auth endpoints)
+          //hard logout on refresh failure (for non-auth endpoints)
           localStorage.clear();
           window.location.href = '/';
           return Promise.reject(e);
@@ -71,7 +71,7 @@ api.interceptors.response.use(
         }
       }
 
-      // Wait for the inflight refresh, then replay
+      //wait for the inflight refresh, then replay
       return new Promise((resolve) => {
         queue.push((newAT) => {
           original.headers = { ...(original.headers || {}), Authorization: `Bearer ${newAT}` };

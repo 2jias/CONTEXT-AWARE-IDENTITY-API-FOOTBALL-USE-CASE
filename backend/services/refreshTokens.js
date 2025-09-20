@@ -2,7 +2,7 @@ const db = require('../db/knex');
 const { v4: uuidv4 } = require('uuid');
 
 function parseTtl(input) {
-  // supports "15m", "30d", "12h"; defaults to 30d
+  //supports "15m", "30d", "12h"; defaults to 30d
   const m = String(input || '').match(/^(\d+)\s*([smhd])$/i);
   if (!m) return 30 * 24 * 60 * 60 * 1000; // 30d
   const n = Number(m[1]);

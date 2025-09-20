@@ -1,12 +1,3 @@
-// function requireRole(...allowed) {
-//   return (req, res, next) => {
-//     if (!req.user || !allowed.includes(req.user.role)) {
-//       return res.status(403).json({ message: 'Forbidden: insufficient role' });
-//     }
-//     next();
-//   };
-// }
-// module.exports = { requireRole };
 function requireRole(allowed) {
   const allow = new Set((Array.isArray(allowed) ? allowed : [allowed])
     .filter(Boolean)

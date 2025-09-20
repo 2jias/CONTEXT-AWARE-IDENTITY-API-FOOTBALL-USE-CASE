@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import api from '../utils/api';
 
-// --- tiny helpers ---
 const ROLES = ['Player', 'Coach', 'Journalist', 'Developer'];
 const fmt = (s) => (s ? new Date(s).toLocaleString() : '—');
 const short = (id) => (id ? `${String(id).slice(0, 8)}…` : '—');
@@ -15,7 +14,7 @@ async function logoutEverywhere() {
   window.location.href = '/';
 }
 
-// --- simple inline styles (works without Tailwind) ---
+//simple inline styles 
 const styles = {
   shell: { minHeight: '100vh', background: '#f1f5f9', color: '#0f172a' },
   card: { maxWidth: 1150, margin: '24px auto', background: '#fff', borderRadius: 16, boxShadow: '0 1px 2px rgba(0,0,0,0.06)', border: '1px solid #e2e8f0' },
@@ -39,7 +38,7 @@ const styles = {
   chip: (ok) => ({ padding: '2px 8px', borderRadius: 999, fontSize: 12, background: ok ? '#dcfce7' : '#ffe4e6', color: ok ? '#166534' : '#9f1239' }),
 };
 
-// --- Top Bar ---
+//top bar
 function TopBar() {
   const role = localStorage.getItem('role') || '—';
   return (
@@ -54,7 +53,7 @@ function TopBar() {
   );
 }
 
-// --- Tabs ---
+//tabs
 function Tabs({ tab, setTab }) {
   const TABS = ['Users', 'Sessions', 'Audit'];
   return (
@@ -66,7 +65,7 @@ function Tabs({ tab, setTab }) {
   );
 }
 
-// --- Users ---
+//users
 function UsersTab() {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -133,7 +132,7 @@ function UsersTab() {
   );
 }
 
-// --- Sessions ---
+//sessions
 function SessionsTab() {
   const [rows, setRows] = useState([]);
   const [err, setErr] = useState('');
@@ -228,7 +227,7 @@ function SessionsTab() {
   );
 }
 
-// --- Audit ---
+//audit
 function AuditTab() {
   const [rows, setRows] = useState([]);
   const [err, setErr] = useState('');
@@ -254,7 +253,7 @@ function AuditTab() {
     } finally { setLoading(false); }
   };
 
-  useEffect(() => { load(); }, []); // initial load
+  useEffect(() => { load(); }, []); //initial load
 
   return (
     <div style={styles.section}>
@@ -310,7 +309,7 @@ function AuditTab() {
   );
 }
 
-// --- Page shell ---
+//page shell
 export default function AdminDashboard() {
   const [tab, setTab] = useState('Users');
   return (

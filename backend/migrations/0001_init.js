@@ -2,17 +2,17 @@
  * @param {import('knex').Knex} knex
  */
 exports.up = async function(knex) {
-  // Roles check constraint or enum-like behavior
+  //roles check constraint
   await knex.schema.createTable('Users', (t) => {
     t.increments('id').primary();
     t.string('username').notNullable().unique();
     t.string('passwordHash').notNullable();
-    t.string('role').notNullable(); // we'll add a CHECK below
+    t.string('role').notNullable(); 
     t.text('totpSecret');
     t.boolean('is2FAEnabled').notNullable().defaultTo(false);
-    t.text('recoveryCodes'); // JSON string
+    t.text('recoveryCodes'); //JSON string
   });
-  // CHECK constraint for role
+  //check constraint for role
   await knex.raw(`
     ALTER TABLE "Users"
     ADD CONSTRAINT users_role_check
@@ -25,7 +25,7 @@ exports.up = async function(knex) {
     t.text('fullName');
     t.text('preferredName');
     t.text('jerseyName');
-    t.text('dob');       // keep as TEXT to mirror current behavior
+    t.text('dob');      
     t.text('position');
   });
 
@@ -56,7 +56,7 @@ exports.up = async function(knex) {
     t.text('status').notNullable();
     t.text('ip');
     t.text('userAgent');
-    t.text('metadata'); // JSON string
+    t.text('metadata'); 
     t.index(['userId','action','status']);
   });
 };

@@ -16,7 +16,7 @@ const options = {
       },
     },
   },
-  apis: ['./routes/*.js'], // we’ll add JSDoc blocks in your routes
+  apis: ['./routes/*.js'], 
 };
 
 module.exports = swaggerJsdoc(options);

@@ -14,13 +14,13 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/player', verifyAccessToken, playerRoutes); // protect all /api/player routes
+app.use('/api/player', verifyAccessToken, playerRoutes); //protect all /api/player routes
 app.use('/api/admin', verifyAccessToken, adminRoutes);
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(openapi));
 console.log('API docs: http://localhost:3000/api/docs');
 
-const PORT = process.env.PORT || 3000; // use .env if present
+const PORT = process.env.PORT || 3000; //use .env if present
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

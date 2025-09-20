@@ -107,18 +107,18 @@ router.post('/login', async (req, res) => {
   if (!ok) return res.status(401).json({ message: 'Invalid credentials' });
 
   if (user.is2FAEnabled) {
-    // try TOTP
+    //try TOTP
     const totpOk = code && speakeasy.totp.verify({
       secret: user.totpSecret, encoding: 'base32', token: String(code), window: 1
     });
 
-    // try recovery
+    //try recovery
     const tryRecovery = () => {
       try {
         const list = JSON.parse(user.recoveryCodes || '[]');
         const idx = list.indexOf(code);
         if (idx >= 0) {
-          list.splice(idx, 1); // consume once
+          list.splice(idx, 1); //consume once
           return knex('Users').where({ id: user.id }).update({ recoveryCodes: JSON.stringify(list) }).then(() => true);
         }
       } catch {}

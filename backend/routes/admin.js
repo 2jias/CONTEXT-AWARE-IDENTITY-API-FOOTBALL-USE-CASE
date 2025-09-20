@@ -8,7 +8,7 @@ const { getById, revoke, revokeAllForUser } = require('../services/refreshTokens
 const router = express.Router();
 
 router.get('/_ping', (req,res)=> res.json({ ok:true, role:req.user?.role }));
-// All admin routes require Developer (you already mount verifyAccessToken in server.js)
+//all admin routes require Developer (already mount verifyAccessToken in server.js)
 router.use(requireRole(['Developer']));
 
 /** GET /api/admin/audit?limit=50&userId=..&action=..&status=success|failure */
@@ -17,7 +17,7 @@ router.get('/audit', async (req, res) => {
     const limit = Math.min(parseInt(req.query.limit || '50', 10), 500);
     const { userId, action, status } = req.query;
 
-    const q = db('AuditLog') // NOTE: case must match your migration table names
+    const q = db('AuditLog') 
       .select('id', 'timestamp', 'userId', 'action', 'status', 'resource', 'ip', 'userAgent', 'metadata')
       .orderBy('id', 'desc')
       .limit(limit);
@@ -117,7 +117,7 @@ router.post('/refresh-tokens/revoke-all', async (req, res) => {
 /** GET /api/admin/users */
 router.get('/users', async (_req, res) => {
   try {
-    const rows = await db('Users') // NOTE: case-sensitive table name if created quoted
+    const rows = await db('Users') 
       .select('id', 'username', 'role')
       .orderBy('id', 'asc');
     res.json(rows);

@@ -56,7 +56,7 @@ db.serialize(() => {
     FOREIGN KEY (userId) REFERENCES Users(id)
   )`);
 
-  // ---- schema upgrades for existing DBs (safe no-op if column already exists)
+  //schema upgrades for existing DBs (safe no-op if column already exists)
   const ensureColumn = (table, column, def) => {
     db.all(`PRAGMA table_info(${table})`, (err, cols) => {
       if (err) return;

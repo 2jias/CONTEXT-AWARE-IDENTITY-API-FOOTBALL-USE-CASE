@@ -26,7 +26,7 @@ const router = express.Router();
  *       403: { description: Access denied (Players cannot list all players) }
  *       401: { description: Unauthorized }
  */
-// list players (non-Players only)
+//list players (non-Players only)
 router.get('/', async (req, res) => {
   if (req.user.role === PLAYER) return res.status(403).json({ message: 'Access denied' });
   const rows = await knex('Players').select('id','preferredName','jerseyName');
@@ -62,7 +62,7 @@ router.get('/', async (req, res) => {
  *                       visibleTo: { type: string }
  *       401: { description: Unauthorized }
  */
-// my profile
+//my profile
 router.get('/me', async (req, res) => {
   const p = await knex('Players').where({ userId: req.user.id }).first();
   if (!p) return res.status(404).json({ message: 'Player not found' });
@@ -111,7 +111,7 @@ router.get('/me', async (req, res) => {
  *       404: { description: Player not found }
  *       500: { description: Update failed }
  */
-// update my profile + visibility
+//update my profile + visibility
 router.put('/me', async (req, res) => {
   const p = await knex('Players').where({ userId: req.user.id }).first('id');
   if (!p) return res.status(404).json({ message: 'Player not found' });
@@ -166,7 +166,7 @@ router.put('/me', async (req, res) => {
  *       401: { description: Unauthorized }
  *       404: { description: Player not found }
  */
-// get player by role visibility
+//get player by role visibility
 router.get('/:id', async (req, res) => {
   const playerId = req.params.id;
   const roleFromToken = req.user.role;

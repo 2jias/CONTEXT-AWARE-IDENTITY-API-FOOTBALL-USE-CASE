@@ -32,7 +32,7 @@ export default function Layout({ children }) {
             {role === 'Developer' && (
               <button className="btn" onClick={() => go('/admin')}>ADMIN</button>
             )}
-            {/* 👇 SECURITY button sits right next to LOG OUT */}
+            {/* SECURITY button sits right next to LOG OUT */}
             <button className="btn" onClick={() => go('/settings/security')}>SECURITY</button>
             <div className="avatar" title={role || 'Guest'}>👤</div>
             <button className="btn btn-danger" onClick={logout}>LOG OUT</button>

@@ -16,7 +16,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setErr(''); setOk('');
     try {
-      await api.post('/auth/register', { username, password, role }); // backend doesn't use email
+      await api.post('/auth/register', { username, password, role }); //backend doesn't use email
       setOk('Registration successful! You can now log in.');
       setTimeout(()=>nav('/login'), 700);
     } catch {
